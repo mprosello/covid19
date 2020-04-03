@@ -11,6 +11,7 @@ fig2 = strcat(name_file_1, 'global.png');
 DataConfirmed = importdata(file_of_confirmed,',',1);
 DataDeath = importdata(file_of_death,',',1);
 DataRecovered = importdata(file_of_recovered,',',1);
+DataRecovered = importdata(file_of_recovered,',',1);
 
 indexSpain = 202;
 
