@@ -29,7 +29,7 @@ figure
 semilogy(Date,ConfirmedSpain,'*b',Date,RecoveredSpain,'*g',Date,DeathSpain,'*r')
 h = legend ("Confirmats","Recuperats","Morts","northwest");
 legend (h, "location", "northwest");
-text (pi, 1000, ctime (time ()));
+text (pi, 10, ctime (time ()));
 xlabel('Dia des de que van començar a contar els xinesos')
 ylabel('Nombre de casos en Espanya')
 saveas(gcf, fig)
@@ -54,7 +54,7 @@ semilogy(DateGlobal,ConfirmedGlobal,'*b',DateGlobal,RecoveredGlobal,'*g',DateGlo
 %semilogy(DateGlobal,ConfirmedGlobal,'*b')
 h2 = legend ("Confirmats","Recuperats","Morts","northwest");
 legend (h2, "location", "northwest");
-text (pi, 1000, ctime (time ()));
+text (pi, 300000, ctime (time ()));
 xlabel('Dia des de que van començar a contar els xinesos')
 ylabel('Nombre de casos global')
 saveas(gcf, fig2)
