@@ -9,6 +9,8 @@ fig = strcat(name_file_1, 'spain.png');
 fig2 = strcat(name_file_1, 'global.png');
 fig3 = strcat(name_file_1, 'daily_spain.png');
 
+textXlabel = 'Dies';
+
 DataConfirmed = importdata(file_of_confirmed,',',1);
 DataDeath = importdata(file_of_death,',',1);
 DataRecovered = importdata(file_of_recovered,',',1);
@@ -17,7 +19,11 @@ indexSpain = 202;
 
 ConfirmedSpain = DataConfirmed.data(indexSpain,:);
 ConfirmedSpain(1:3) = [];
-Date = 1:length(ConfirmedSpain)
+Date = 1:length(ConfirmedSpain);
+
+length(ConfirmedSpain);
+
+textDies = strcat('Dies acumulats:  ', num2str(length(ConfirmedSpain)));
 
 DeathSpain = DataDeath.data(indexSpain,:);
 DeathSpain(1:3) = [];
@@ -25,14 +31,18 @@ DeathSpain(1:3) = [];
 RecoveredSpain = DataRecovered.data(200,:);
 RecoveredSpain(1:3) = [];
 
-figure
-semilogy(Date,ConfirmedSpain,'*b',Date,RecoveredSpain,'*g',Date,DeathSpain,'*r')
-h = legend ("Confirmats","Recuperats","Morts","northwest");
-legend (h, "location", "northwest");
+ConfirmedSpain(ConfirmedSpain<=0) = NaN;
+RecoveredSpain(RecoveredSpain<=0) = NaN;
+DeathSpain(DeathSpain<=0) = NaN;
+
+figure;
+semilogy(Date,ConfirmedSpain,'*b',Date,RecoveredSpain,'*g',Date,DeathSpain,'*r');
+legend ("Confirmats","Recuperats","Morts","location","northwest");
 text (pi, 10, ctime (time ()));
-xlabel('Dia des de que van començar a contar els xinesos')
-ylabel('Nombre de casos en Espanya')
-saveas(gcf, fig)
+text (pi, 20, textDies);
+xlabel(textXlabel);
+ylabel('Nombre de casos en Espanya');
+saveas(gcf, fig);
 
 ConfirmedGlobalMatrix = DataConfirmed.data(:,:);
 ConfirmedGlobalMatrix(:,1:3) = [];
@@ -49,20 +59,19 @@ RecoveredGlobalMatrix = DataRecovered.data(:,:);
 RecoveredGlobalMatrix(:,1:3) = [];
 RecoveredGlobal = sum(RecoveredGlobalMatrix);
 
-figure
-semilogy(DateGlobal,ConfirmedGlobal,'*b',DateGlobal,RecoveredGlobal,'*g',DateGlobal,DeathGlobal,'*r')
-%semilogy(DateGlobal,ConfirmedGlobal,'*b')
-h2 = legend ("Confirmats","Recuperats","Morts","northwest");
-legend (h2, "location", "northwest");
-text (pi, 300000, ctime (time ()));
-xlabel('Dia des de que van començar a contar els xinesos')
-ylabel('Nombre de casos global')
-saveas(gcf, fig2)
+figure;
+semilogy(DateGlobal,ConfirmedGlobal,'*b',DateGlobal,RecoveredGlobal,'*g',DateGlobal,DeathGlobal,'*r');
+legend ("Confirmats","Recuperats","Morts", "location", "northwest");
+text (pi, 200000, ctime (time ()));
+text (pi, 400000, textDies);
+xlabel(textXlabel);
+ylabel('Nombre de casos global');
+saveas(gcf, fig2);
 
 ConfirmedSpainAux = ConfirmedSpain;
 ConfirmedSpainAux(1) = [];
 ConfirmedSpain(length(ConfirmedSpain)) = [];
-DailyConfirmedSpain = ConfirmedSpainAux - ConfirmedSpain
+DailyConfirmedSpain = ConfirmedSpainAux - ConfirmedSpain;
 
 DeathSpainAux = DeathSpain;
 DeathSpainAux(1) = [];
@@ -76,13 +85,15 @@ DailyRecoveredSpain = RecoveredSpainAux - RecoveredSpain;
 
 DateDaily = 1:length(DailyRecoveredSpain);
 
-figure
-plot(DateDaily,DailyConfirmedSpain,'-b',"linewidth",2,DateDaily,DailyRecoveredSpain,'-g',"linewidth",2,DateDaily,DailyDeathSpain,'-r',"linewidth",2)
-h3 = legend ("Confirmats","Recuperats","Morts","northwest");
-legend (h3, "location", "northwest");
+figure;
+p1 = plot(DateDaily,DailyConfirmedSpain,'-b',"linewidth",2,DateDaily,DailyRecoveredSpain,'-g',"linewidth",2,DateDaily,DailyDeathSpain,'-r',"linewidth",2);
+legend ("Confirmats","Recuperats","Morts", "location", "northwest");
 text (pi, 1000, ctime (time ()));
-xlabel('Dia des de que van començar a contar els xinesos')
-ylabel('Nombre de casos diaris Espanya')
-saveas(gcf, fig3)
+text (pi, 1800, textDies);
+xlabel(textXlabel);
+ylabel('Nombre de casos diaris Espanya');
+saveas(gcf, fig3);
+
+close all
 
 
