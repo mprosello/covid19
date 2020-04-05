@@ -9,6 +9,7 @@ fig = strcat(name_file_1, 'spain.png');
 fig2 = strcat(name_file_1, 'global.png');
 fig3 = strcat(name_file_1, 'daily_spain.png');
 
+
 textXlabel = 'Dies';
 
 DataConfirmed = importdata(file_of_confirmed,',',1);
