@@ -16,7 +16,7 @@ DataConfirmed = importdata(file_of_confirmed,',',1);
 DataDeath = importdata(file_of_death,',',1);
 DataRecovered = importdata(file_of_recovered,',',1);
 
-indexSpain = 228;
+indexSpain = 227;
 
 ConfirmedSpain = DataConfirmed.data(indexSpain,:);
 ConfirmedSpain(1:3) = [];
@@ -29,7 +29,7 @@ textDies = strcat('Dies acumulats:  ', num2str(length(ConfirmedSpain)));
 DeathSpain = DataDeath.data(indexSpain,:);
 DeathSpain(1:3) = [];
 
-RecoveredSpain = DataRecovered.data(215,:);
+RecoveredSpain = DataRecovered.data(214,:);
 RecoveredSpain(1:3) = [];
 
 ConfirmedSpain(ConfirmedSpain<=0) = NaN;
